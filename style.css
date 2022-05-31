@@ -1,0 +1,11 @@
+.restart-btn {
+	display: none;
+}
+
+.removeBtns {
+	display: none;
+}
+
+.active {
+	display: block;
+}
