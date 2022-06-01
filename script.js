@@ -1,3 +1,16 @@
+// Vars
+let computerScore = 0;
+let userScore = 0;
+const rock = document.querySelector('.rock');
+const paper = document.querySelector('.paper');
+const scissors = document.querySelector('.scissors');
+const buttonContainer = document.querySelector('.btn-container');
+const gameResultPara = document.querySelector('.gameResults');
+const userScorePara = document.querySelector('.userScore');
+const computerScorePara = document.querySelector('.computerScore');
+const restartButton = document.querySelector('.restart-btn');
+
+// This func for computer to choose its weapon
 function computerPlay() {
 	let choices = ['Rock', 'Paper', 'Scissors'];
 	let randChoice = Math.floor(Math.random() * choices.length);
@@ -5,6 +18,7 @@ function computerPlay() {
 	return randomPlay;
 }
 
+// This func plays one round
 function playRound(playerSelection, computerSelection) {
 	if (playerSelection === computerSelection) {
 		gameResultPara.textContent = 'Draw!';
@@ -23,18 +37,7 @@ function playRound(playerSelection, computerSelection) {
 	}
 }
 
-let computerScore = 0;
-let userScore = 0;
-const rock = document.querySelector('.rock');
-const paper = document.querySelector('.paper');
-const scissors = document.querySelector('.scissors');
-const buttonContainer = document.querySelector('.btn-container');
-const gameResultPara = document.querySelector('.gameResults');
-const userScorePara = document.querySelector('.userScore');
-const computerScorePara = document.querySelector('.computerScore');
-const endGamePara = document.querySelector('.endGame');
-const restartButton = document.querySelector('.restart-btn');
-
+// This func handles the user's click
 function handleClick(playerSelection) {
 	const computerSelection = computerPlay();
 	playRound(playerSelection, computerSelection);
@@ -43,36 +46,41 @@ function handleClick(playerSelection) {
 	endGameResult();
 }
 
+// This func to end the game
 function endGameResult() {
 	if(computerScore === 3 || userScore == 3) {
-		gameResultPara.textContent = '';
 		buttonContainer.classList.add('removeBtns');
 		restartButton.classList.add('active');
 		return endGame();
 	}
 }
 
+// This func to show the winner
 function endGame() {
 	return userScore > computerScore
-	? (endGamePara.textContent = 'Winner! Winner! Chicken Dinner!')
-	: (endGamePara.textContent = 'Looooser! Go cryyyy!');
+	? (gameResultPara.textContent = 'Winner! Winner! Chicken Dinner!')
+	: (gameResultPara.textContent = 'Looooser! Go cryyyy!');
 }
 
+
+// This func to restart the game
 function restartGame() {
 	computerScore = 0;
 	userScore = 0;
 	gameResultPara.textContent = 'Choose your weapon!';
 	userScorePara.textContent = 'User score: 0';
 	computerScorePara.textContent = 'Computer score: 0';
-	endGamePara.textContent = '';
 	restartButton.classList.remove('active');
 	buttonContainer.classList.remove('removeBtns');
 }
 
+// Func for user's chouces
 const handleCLickRock = () => handleClick('Rock');
 const handleCLickPaper = () => handleClick('Paper');
 const handleCLickScissors = () => handleClick('Scissors');
 
+
+// Event listeners
 rock.addEventListener('click', handleCLickRock);
 paper.addEventListener('click', handleCLickPaper);
 scissors.addEventListener('click', handleCLickScissors);
